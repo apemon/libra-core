@@ -2,6 +2,7 @@ import {TransactionArgument} from '../../__generated__/transaction_pb'
 import { AddressLCS } from './AddressLCS'
 import {BigNumber} from 'bignumber.js'
 import { LCSSerialization } from '../serialization'
+import {BufferUtil} from '../../common/BufferUtil'
 
 export class TransactionArgumentLCS {
     u64: BigNumber
@@ -54,7 +55,7 @@ export class TransactionArgumentLCS {
         } else if(this.type === TransactionArgument.ArgType.STRING) {
             return '{STRING: ' + this.string + '}'
         } else if(this.type === TransactionArgument.ArgType.BYTEARRAY) {
-            return '{ByteArray: 0xb"' + LCSSerialization.toHexString(this.byteArray) + '"}'
+            return '{ByteArray: 0xb"' + BufferUtil.toHex(this.byteArray) + '"}'
         }
         throw new Error('unknow type')
     }
